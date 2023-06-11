@@ -12,7 +12,6 @@ class DiscordProvider extends AbstractProvider implements ProviderInterface
      * {@inheritDoc}
      */
     protected $scopes = [
-        'email',
         'identify',
     ];
 
@@ -56,7 +55,7 @@ class DiscordProvider extends AbstractProvider implements ProviderInterface
 
         $response = $this->getHttpClient()->get($userUrl, [
             'headers' => [
-                'Authorization' => 'Bearer '.$token,
+                'Authorization' => 'Bearer ' . $token,
             ],
         ]);
 
@@ -70,7 +69,6 @@ class DiscordProvider extends AbstractProvider implements ProviderInterface
     {
         return (new User())->setRaw($user)->map([
             'id' => $user['id'],
-            'name' => $user['username'],
             'email' => $user['email'],
             'avatar' => sprintf('https://cdn.discordapp.com/avatars/%s/%s.png', $user['id'], $user['avatar']),
         ]);
